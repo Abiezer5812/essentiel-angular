@@ -24,44 +24,20 @@
 
 <!-- Contenu -->
 <div id="home" class="container">
+
   <div class="row mt-4 mb-4">
-
-    <div class="col-md-4">
-      <app-article
-          [titreArticle]="'Vélo'"
-          [prixArticle]="80"
-          [description]="'Un super vélo tout terrain'"
-          [urlImg]="'assets/images/vélo.webp'"
-          [textAltImg]="'Un vélo'"
-          [dispo]="false"
-          (info)="onAffiche($event)"></app-article>
-    </div>
-
-    <div class="col-md-4">
-      <app-article
-          [titreArticle]="'Jouet'"
-          [prixArticle]="15"
-          [description]="'Un jouet pour les enfants'"
-          [urlImg]="'assets/images/jouet.webp'"
-          [textAltImg]="'Un jouet'"
-          [dispo]="true"
-          (info)="onAffiche($event)"></app-article>
-    </div>
-
-    <div class="col-md-4">
-      <app-article
-          [titreArticle]="'TV'"
-          [prixArticle]="230"
-          [description]="'Très bonne résolution'"
-          [urlImg]="'assets/images/tv.jpg'"
-          [textAltImg]="'Une télévision'"
-          [dispo]="true"
-          (info)="onAffiche($event)"></app-article>
-    </div>
-
+    <app-article
+      *ngFor="let element of liste"
+      class="col-md-4"
+      [titreArticle]="element.titreArticle"
+      [prixArticle]="element.prixArticle"
+      [description]="element.description"
+      [urlImg]="element.urlImg"
+      [textAltImg]="element.textAltImg"
+      [dispo]="element.dispo"
+      (info)="onAffiche($event)"></app-article>
   </div>
-</div>
-
+  
 <!-- Pied de page -->
 <footer class="bg-dark text-white text-center py-5">
   Copyright &copy; La Bonne Affaire
