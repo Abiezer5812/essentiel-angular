@@ -2,13 +2,23 @@
   <img [src]="urlImg" [alt]="textAltImg" class="card-img-top">
   <div class="card-body">
     <h5 class="card-title" [ngStyle]="{color: getColor()}">
-      {{ titreArticle }}
+      {{ titreArticle | uppercase}}
       <span *ngIf="dispo === false"> - Indisponible</span>
     </h5>
     <h6 class="card-title">{{ prixArticle }} €</h6>
     <p class="card-text">{{ description }}</p>
 
-    <button class="btn btn-primary" (click)="onLike()">J'aime</button>
+    <button (click)="onLike()" [ngClass]="{
+      'show' : Jaime === true,
+      'hidden' : Jaime === false,
+    }">J'aime</button>
+
+    <button class="nolike" [ngClass]="{
+      'show' : Jaime === false,
+      'hidden' : Jaime === true,
+    }" (click)="onLike()">Je n'aime pas</button>
+<!-- 
+    <button class="btn btn-primary" (click)="onLike()">J'aime</button> -->
     <p class="mt-2">Nombre de like : {{ nbLike }}</p>
 
     <input type="text" placeholder="Écris ton commentaire" [(ngModel)]="comment">

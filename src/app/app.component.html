@@ -16,28 +16,11 @@
     </div>
   </div>
 </nav>
+<router-outlet></router-outlet>
 
-<!-- Message en haut -->
-@if (message) {
-  <div class="alert alert-success text-center mb-0 rounded-0">{{ message }}</div>
-}
 
-<!-- Contenu -->
-<div id="home" class="container">
 
-  <div class="row mt-4 mb-4">
-    <app-article
-      *ngFor="let element of liste"
-      class="col-md-4"
-      [titreArticle]="element.titreArticle"
-      [prixArticle]="element.prixArticle"
-      [description]="element.description"
-      [urlImg]="element.urlImg"
-      [textAltImg]="element.textAltImg"
-      [dispo]="element.dispo"
-      (info)="onAffiche($event)"></app-article>
-  </div>
-  
+
 <!-- Pied de page -->
 <footer class="bg-dark text-white text-center py-5">
   Copyright &copy; La Bonne Affaire

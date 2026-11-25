@@ -7,3 +7,16 @@
   height: 250px;
   object-fit: cover;
 }
+
+.nolike {
+  background-color: cornflowerblue;
+  color: white;
+}
+
+.show {
+  display: inline-block;
+}
+
+.hidden {
+  display: none;
+}

@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgFor } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { ArticleComponent } from './article/article.component';
-import { ReturnStatement } from '@angular/compiler';
+import { DataService, Article } from './data.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +11,7 @@ import { ReturnStatement } from '@angular/compiler';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'labonneaffaire';
   menuOuvert = false;
 
@@ -20,36 +20,15 @@ export class AppComponent {
   prix3: number = 40;
 
   message: string = "";
+  liste: Article[] = [];
+
+  constructor(private dataService: DataService) {}
+
+  ngOnInit() {
+    this.liste = this.dataService.getArticles();
+  }
 
   onAffiche(titre: string) {
     this.message = "Merci d'avoir voté pour l'article : " + titre;
   }
-
-  liste = [
-    {
-      titreArticle: 'Vélo',
-      prixArticle: 80,
-      description: 'Un super vélo tout terrain',
-      urlImg: 'assets/images/vélo.webp',
-      textAltImg: 'Un vélo',
-      dispo: false
-    },
-    {
-      titreArticle: 'TV',
-      prixArticle: 230,
-      description: "Très bonne qualité d'écran",
-      urlImg: 'assets/images/tv.jpg',
-      textAltImg: 'Une télévision',
-      dispo: true
-    },
-    {
-      titreArticle: 'Jouet',
-      prixArticle: 15,
-      description: 'Un jouet pour les enfants',
-      urlImg: 'assets/images/jouet.webp',
-      textAltImg: 'Un jouet',
-      dispo:  true
-    }
-  ];
-
 }
