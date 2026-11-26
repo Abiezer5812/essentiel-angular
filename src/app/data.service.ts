@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 export interface Article {
+  id: number;
   titreArticle: string;
   prixArticle: number;
   description: string;
@@ -16,6 +17,7 @@ export class DataService {
 
   private liste: Article[] = [
     {
+      id: 1,
       titreArticle: 'Vélo',
       prixArticle: 80,
       description: 'Un super vélo tout terrain',
@@ -23,7 +25,8 @@ export class DataService {
       textAltImg: 'Un vélo',
       dispo: false
     },
-    {
+    { 
+      id: 2,
       titreArticle: 'TV',
       prixArticle: 230,
       description: "Très bonne qualité d'écran",
@@ -32,6 +35,7 @@ export class DataService {
       dispo: true
     },
     {
+      id: 3,
       titreArticle: 'Jouet',
       prixArticle: 15,
       description: 'Un jouet pour les enfants',
@@ -45,6 +49,10 @@ export class DataService {
 
   getArticles(): Article[] {
     return this.liste;
+  }
+
+  getArticle(id: number): Article | undefined {
+    return this.liste.find(article => article.id === id);
   }
 
   getLikes(titre: string): number {

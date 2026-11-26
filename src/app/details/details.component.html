@@ -1,0 +1,10 @@
+<div id="imfoDetails" class="container">
+    @if (article) {
+        <img [src]="article.urlImg" [alt]="article.textAltImg">
+        <h1>{{ article.titreArticle }}</h1>
+        <h3>{{ article.prixArticle }} €</h3>
+        <p>{{ article.description }}</p>
+    } @else {
+        <p>Article introuvable.</p>
+    }
+</div>

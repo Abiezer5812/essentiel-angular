@@ -1,46 +1,50 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { NgIf, NgStyle, NgClass, UpperCasePipe  } from '@angular/common';
+import { Component, Input, Output, EventEmitter, input } from '@angular/core';
+import { NgIf, NgStyle, NgClass, UpperCasePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { DataService } from '../data.service';
+import { DetailsComponent } from '../details/details.component';
 
 @Component({
   selector: 'app-article',
   standalone: true,
-  imports: [FormsModule, NgIf, NgStyle, NgClass, UpperCasePipe ],
-  providers:[DataService],
+  imports: [FormsModule, NgIf, NgStyle, NgClass, UpperCasePipe, RouterLink, DetailsComponent],
   templateUrl: './article.component.html',
   styleUrl: './article.component.css'
 })
 export class ArticleComponent {
-  @Input() titreArticle: string ;
-  @Input() prixArticle: number = 0;
-  @Input() description: string ;
-  @Input() urlImg: string ;
-  @Input() textAltImg: string ;
+  @Input() idProduit: number;
+  @Input() titreArticle: string;
+  @Input() prixArticle: number;
+  @Input() description: string;
+  @Input() urlImg: string;
+  @Input() textAltImg: string;
+  @Input () idArticle: number;
   @Input() dispo: boolean;
-  Jaime: boolean = true
 
-  nbLike: number = 0;
+  jaime: boolean = true;
   comment: string = "Ceci est un commentaire";
 
   @Output() info = new EventEmitter<string>();
 
+  constructor(private dataService: DataService) {}
+
+  get nbLike(): number {
+    return this.dataService.getLikes(this.titreArticle);
+  }
+
   onLike() {
-    if (this.Jaime == true) {
-    this.nbLike++;
-    this.Jaime = false;
+    if (this.jaime) {
+      this.dataService.ajouterLike(this.titreArticle);
+      this.jaime = false;
     } else {
-      this.nbLike--;
-      this.Jaime = true;
+      this.dataService.retirerLike(this.titreArticle);
+      this.jaime = true;
     }
-     this.info.emit(this.titreArticle);
+    this.info.emit(this.titreArticle);
   }
 
   getColor() {
-    if (this.dispo === true) {
-      return "green";
-    } else {
-      return "red";
-    }
+    return this.dispo ? 'green' : 'red';
   }
 }

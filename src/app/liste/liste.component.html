@@ -15,6 +15,7 @@
     <app-article
       *ngFor="let element of liste"
       class="col-md-4"
+      [idArticle]="element.id"
       [titreArticle]="element.titreArticle"
       [prixArticle]="element.prixArticle"
       [description]="element.description"
